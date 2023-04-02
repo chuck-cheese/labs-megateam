@@ -33,7 +33,8 @@ public class Coordinates
 	private Integer y;
 
 	/**
-	 * This method provides accessing a string representation of coordinates class object
+	 * This method provides access to a string representation of coordinates class object
+	 *
 	 * @return coordinates string representation
 	 */
 	@Override
