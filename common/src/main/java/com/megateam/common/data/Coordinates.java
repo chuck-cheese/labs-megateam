@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Is used in Ticket data class
  */
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode
 @XmlRootElement(name = "coordinates")
@@ -22,6 +21,7 @@ public class Coordinates
 	/**
 	 * This field contains X coordinate
 	 */
+	@NonNull
 	@XmlElement(name = "xCoord", required = true)
 	private float x;
 
