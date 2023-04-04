@@ -23,7 +23,7 @@ public class Ticket implements Comparable<Ticket>
 	/**
 	 * This field contains unique ticket id
 	 */
-	@NonNull
+	@Setter
 	@XmlAttribute(name = "ticketId", required = true)
 	private Integer id;
 
