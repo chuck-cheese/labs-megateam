@@ -1,6 +1,6 @@
 package com.megateam.common.data.util;
 
-import com.megateam.common.data.util.exception.LocalDateTimeParsingException;
+import com.megateam.common.exception.impl.LocalDateTimeParsingException;
 import lombok.NonNull;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -22,6 +22,7 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime>
 
 	/**
 	 * This method converts LocalDateTime's string representation into a java object
+	 *
 	 * @param value string representation of the LocalDateTime
 	 * @return LocalDateTime instance
 	 * @throws LocalDateTimeParsingException if the LocalDateTime representation cannot be unmarshalled successfully
@@ -43,6 +44,7 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime>
 
 	/**
 	 * This method converts LocalDateTime object into a string
+	 * 
 	 * @param value LocalDateTime java object
 	 * @return string representation of the specified LocalDateTime java object
 	 * @throws LocalDateTimeParsingException if the LocalDateTime java object cannot ba marshalled successfully
