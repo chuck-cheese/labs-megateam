@@ -20,7 +20,7 @@ public class Venue
 	/**
 	 * This field contains unique venue id
 	 */
-	@NonNull
+	@Setter
 	@XmlAttribute(name = "venueId", required = true)
 	private long id;
 
