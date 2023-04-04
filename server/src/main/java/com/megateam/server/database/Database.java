@@ -93,4 +93,12 @@ public interface Database<T>
 	 * @throws ElementNotFoundException if required element not found
 	 */
 	void removeLower(@NonNull T item) throws ElementNotFoundException;
+
+	/**
+	 * This is an abstraction for method that removes all the elements with the refundable status specified
+	 *
+	 * @param refundable refundable status of removable elements
+	 * @throws ElementNotFoundException if it's nothing to remove
+	 */
+	void removeAnyByRefundable(@NonNull Boolean refundable) throws ElementNotFoundException;
 }
