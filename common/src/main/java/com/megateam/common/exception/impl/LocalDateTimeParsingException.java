@@ -1,4 +1,4 @@
-package com.megateam.common.data.util.exception;
+package com.megateam.common.exception.impl;
 
 import com.megateam.common.exception.ParsingException;
 
