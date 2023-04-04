@@ -1,5 +1,6 @@
 package com.megateam.server.database;
 
+import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
 import com.megateam.common.exception.impl.database.ElementIdNotFoundException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
 import lombok.NonNull;
@@ -40,7 +41,7 @@ public interface Database<T>
 	 *
 	 * @param item the new element which should be added into the database
 	 */
-	void add(@NonNull T item);
+	void add(@NonNull T item) throws ElementIdAlreadyExistsException;
 
 	/**
 	 * This is an abstraction for method that provides an ability to update the existing element by id
