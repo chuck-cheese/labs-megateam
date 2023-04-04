@@ -74,18 +74,23 @@ public interface Database<T>
 
 	/**
 	 * This is an abstraction for method that removes the first element from the database
+	 *
+	 * @throws ElementNotFoundException if required element not found
 	 */
-	void removeFirst();
+	void removeFirst() throws ElementNotFoundException;
 
 	/**
 	 * This is an abstraction for method that removes the last element from the database
+	 *
+	 * @throws ElementNotFoundException if required element not found
 	 */
-	void removeLast();
+	void removeLast() throws ElementNotFoundException;
 
 	/**
 	 * This is an abstraction for method that removes element which is lower than specified one
 	 *
 	 * @param item an element for the comparison
+	 * @throws ElementNotFoundException if required element not found
 	 */
-	void removeLower(@NonNull T item);
+	void removeLower(@NonNull T item) throws ElementNotFoundException;
 }
