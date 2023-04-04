@@ -1,7 +1,7 @@
 package com.megateam.server.database;
 
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
-import com.megateam.common.exception.impl.database.ElementIdNotFoundException;
+import com.megateam.common.exception.impl.database.ElementNotFoundException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
 import lombok.NonNull;
 
@@ -32,9 +32,9 @@ public interface Database<T>
 	 *
 	 * @param id stored element id
 	 * @return element
-	 * @throws ElementIdNotFoundException if the specified id does not exist in the database
+	 * @throws ElementNotFoundException if the specified id does not exist in the database
 	 */
-	T findElementById(@NonNull Integer id) throws ElementIdNotFoundException;
+	T findElementById(@NonNull Integer id) throws ElementNotFoundException;
 
 	/**
 	 * This is an abstraction for method that provides an ability to add new element into the database
@@ -48,17 +48,17 @@ public interface Database<T>
 	 *
 	 * @param id existing element id
 	 * @param item element that the existing element will be updated with
-	 * @throws ElementIdNotFoundException if the specified id does not exist in the database
+	 * @throws ElementNotFoundException if the specified id does not exist in the database
 	 */
-	void update(@NonNull Integer id, @NonNull T item) throws ElementIdNotFoundException;
+	void update(@NonNull Integer id, @NonNull T item) throws ElementNotFoundException;
 
 	/**
 	 * This is an abstraction for method that removes an element from the database by id
 	 *
 	 * @param id element id
-	 * @throws ElementIdNotFoundException if the specified id does not exist in the database
+	 * @throws ElementNotFoundException if the specified id does not exist in the database
 	 */
-	void remove(@NonNull Integer id) throws ElementIdNotFoundException;
+	void remove(@NonNull Integer id) throws ElementNotFoundException;
 
 	/**
 	 * This is an abstraction for method that clears the database

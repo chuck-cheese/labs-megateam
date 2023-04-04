@@ -5,14 +5,14 @@ import com.megateam.common.exception.DatabaseException;
 /**
  * This exception is thrown if during the database operation element id was not found in the database
  */
-public class ElementIdNotFoundException extends DatabaseException
+public class ElementNotFoundException extends DatabaseException
 {
 	/**
 	 * DatabaseException constructor
 	 *
 	 * @param message message for the exception
 	 */
-	public ElementIdNotFoundException(String message)
+	public ElementNotFoundException(String message)
 	{
 		super(message);
 	}
