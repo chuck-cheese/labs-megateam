@@ -1,5 +1,6 @@
 package com.megateam.server.database;
 
+import com.megateam.common.data.util.TicketType;
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
 import com.megateam.common.exception.impl.database.ElementNotFoundException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
@@ -101,4 +102,12 @@ public interface Database<T>
 	 * @throws ElementNotFoundException if it's nothing to remove
 	 */
 	void removeAnyByRefundable(@NonNull Boolean refundable) throws ElementNotFoundException;
+
+	/**
+	 * This is an abstraction for method that retrieves all the elements with type less than specified
+	 *
+	 * @param type type to filter
+	 * @return list of filtered elements
+	 */
+	List<T> findLessThanType(@NonNull TicketType type);
 }
