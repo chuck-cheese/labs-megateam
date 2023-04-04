@@ -2,6 +2,7 @@ package com.megateam.common.execution;
 
 import com.megateam.common.command.Command;
 import com.megateam.common.exception.CommandException;
+import com.megateam.common.exception.DatabaseException;
 import com.megateam.common.exception.impl.command.DefaultExecutorException;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface ExecutionService
 	 * @return command execution status
 	 * @throws DefaultExecutorException if something went wrong during command execution
 	 */
-	default boolean execute(Command command) throws CommandException
+	default boolean execute(Command command) throws CommandException, DatabaseException
 	{
 		throw new DefaultExecutorException("You are now able to use default command execution method");
 	}
@@ -30,7 +31,7 @@ public interface ExecutionService
 	 * @return script execution status
 	 * @throws DefaultExecutorException if something went wrong during command script execution
 	 */
-	default boolean execute(List<Command> script) throws CommandException
+	default boolean execute(List<Command> script) throws CommandException, DatabaseException
 	{
 		throw new DefaultExecutorException("You are now able to use default script execution method");
 	}
