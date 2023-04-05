@@ -1,7 +1,6 @@
 package com.megateam.common.data.validation;
 
 import com.megateam.common.data.Coordinates;
-import com.megateam.common.exception.ValidationException;
 import com.megateam.common.exception.impl.validation.BoundValidationException;
 import com.megateam.common.exception.impl.validation.NullValidationException;
 import lombok.NonNull;
@@ -45,7 +44,7 @@ public class CoordinatesValidator
 	 * @throws BoundValidationException if x coordinate is less or equal to -390 or is an infinity
 	 * @throws NullValidationException if y coordinate is null
 	 */
-	public static void validateCoordinates(@NonNull Coordinates coordinates) throws ValidationException
+	public static void validateCoordinates(@NonNull Coordinates coordinates) throws BoundValidationException, NullValidationException
 	{
 		validateXCoord(coordinates.getX());
 		validateXCoord(coordinates.getY());
