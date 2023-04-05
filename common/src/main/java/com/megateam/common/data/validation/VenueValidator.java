@@ -58,7 +58,6 @@ public class VenueValidator
 	 */
 	public static void validateVenue(@NonNull Venue venue) throws BoundValidationException, NullValidationException, CannotBeEmptyException
 	{
-		validateVenueId(venue.getId());
 		validateVenueName(venue.getName());
 		validateVenueCapacity(venue.getCapacity());
 	}
