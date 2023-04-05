@@ -8,8 +8,6 @@ import com.megateam.common.exception.impl.validation.NullValidationException;
 
 public class VenueValidator
 {
-//	TODO: implement venue validator (static)
-
 	/**
 	 * Method validates venue id
 	 *
