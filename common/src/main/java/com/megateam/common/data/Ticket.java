@@ -74,7 +74,7 @@ public class Ticket implements Comparable<Ticket>
 	 * This field contains ticket type (can be null)
 	 */
 	@XmlElement(name = "ticketType")
-	private TicketType type;
+	private final TicketType type;
 
 	/**
 	 * This field contains ticket venue
