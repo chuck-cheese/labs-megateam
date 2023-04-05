@@ -42,7 +42,7 @@ public class Venue
 	 * This field contains venue type (can be null)
 	 */
 	@XmlElement(name = "venueType")
-	private VenueType type;
+	private final VenueType type;
 
 	/**
 	 * This method provides access to a string representation of venue class object
