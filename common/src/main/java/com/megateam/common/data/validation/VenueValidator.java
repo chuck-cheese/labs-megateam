@@ -1,7 +1,6 @@
 package com.megateam.common.data.validation;
 
 import com.megateam.common.data.Venue;
-import com.megateam.common.exception.ValidationException;
 import com.megateam.common.exception.impl.validation.BoundValidationException;
 import com.megateam.common.exception.impl.validation.CannotBeEmptyException;
 import com.megateam.common.exception.impl.validation.NullValidationException;
@@ -26,7 +25,7 @@ public class VenueValidator
 	 * @throws CannotBeEmptyException if venue name is empty
 	 * @throws NullValidationException if venue name is not specified
 	 */
-	public static void validateVenueName(String name) throws ValidationException
+	public static void validateVenueName(String name) throws NullValidationException, CannotBeEmptyException
 	{
 		if (name == null) throw new NullValidationException("Venue name should be specified");
 
@@ -56,7 +55,7 @@ public class VenueValidator
 	 * @throws NullValidationException if some non-null fields are null
 	 * @throws CannotBeEmptyException if some non-empty fields are empty
 	 */
-	public static void validateVenue(Venue venue) throws ValidationException
+	public static void validateVenue(Venue venue) throws BoundValidationException, NullValidationException, CannotBeEmptyException
 	{
 		validateVenueId(venue.getId());
 		validateVenueName(venue.getName());
