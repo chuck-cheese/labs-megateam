@@ -6,6 +6,9 @@ import com.megateam.common.exception.impl.validation.CannotBeEmptyException;
 import com.megateam.common.exception.impl.validation.NullValidationException;
 import lombok.NonNull;
 
+/**
+ * Utility class for venue validation
+ */
 public class VenueValidator
 {
 	/**
