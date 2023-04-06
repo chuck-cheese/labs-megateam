@@ -8,6 +8,9 @@ import lombok.NonNull;
 
 import java.time.LocalDateTime;
 
+/**
+ * Utility class for ticket validation
+ */
 public class TicketValidator
 {
 	/**
