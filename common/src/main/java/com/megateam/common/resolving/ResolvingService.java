@@ -20,6 +20,8 @@ public interface ResolvingService
 	 * @param commandLine command line with arguments
 	 * @return command instance
 	 * @throws CommandException if something went wrong during the command resolving
+	 * @throws ValidationException if something went wrong during validation
+	 * @throws ParsingException if something went wrong during parsing
 	 */
 	default Command resolve(String commandLine) throws CommandException, ValidationException, ParsingException
 	{
@@ -32,8 +34,10 @@ public interface ResolvingService
 	 * @param script command script for resolving
 	 * @return list of command prepared for execution
 	 * @throws CommandException if something went wrong during the command resolving
+	 * @throws ValidationException if something went wrong during validation
+	 * @throws ParsingException if something went wrong during parsing
 	 */
-	default List<Command> resolve(File script) throws CommandException, ValidationException
+	default List<Command> resolve(File script) throws CommandException, ValidationException, ParsingException
 	{
 		throw new DefaultResolverException("You are now able to use default command script resolving method");
 	}
