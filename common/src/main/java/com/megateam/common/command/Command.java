@@ -41,6 +41,7 @@ public abstract class Command
 	/**
 	 * Amount of command arguments
 	 */
+	@Getter
 	protected final int amountOfArguments;
 
 	/**
