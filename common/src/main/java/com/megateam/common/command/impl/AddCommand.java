@@ -22,7 +22,7 @@ public class AddCommand extends Command
 	 */
 	public AddCommand(List<String> arguments, Printer printer)
 	{
-		super(arguments, printer, true);
+		super(arguments, printer, true, 0);
 	}
 
 	/**

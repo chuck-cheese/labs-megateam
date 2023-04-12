@@ -22,7 +22,7 @@ public class HelpCommand extends Command
 	 */
 	public HelpCommand(List<String> arguments, Printer printer)
 	{
-		super(arguments, printer, false);
+		super(arguments, printer, false, 0);
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class ExitCommand extends Command
 	 */
 	public ExitCommand(List<String> arguments, Printer printer)
 	{
-		super(arguments, printer, false);
+		super(arguments, printer, false, 0);
 	}
 
 	/**

@@ -22,7 +22,7 @@ public class InfoCommand extends Command
 	 */
 	public InfoCommand(List<String> arguments, Printer printer)
 	{
-		super(arguments, printer, false);
+		super(arguments, printer, false, 0);
 	}
 
 	/**

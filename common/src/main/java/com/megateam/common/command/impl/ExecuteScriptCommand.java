@@ -21,7 +21,7 @@ public class ExecuteScriptCommand extends Command
 	 */
 	public ExecuteScriptCommand(List<String> arguments, Printer printer)
 	{
-		super(arguments, printer, false);
+		super(arguments, printer, false, 1);
 	}
 
 	/**
