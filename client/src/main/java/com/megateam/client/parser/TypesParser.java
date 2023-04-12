@@ -75,9 +75,12 @@ public class TypesParser
      */
     public static TicketType parseTicketType(String line) throws InaproppriateParsingTypeException
     {
+        if ("".equals(line.trim()))
+            return null;
+
         for (TicketType type : TicketType.values())
 		{
-            if (type.toString().equalsIgnoreCase(line))
+            if (type.toString().equalsIgnoreCase(line.trim()))
 			{
                 return TicketType.valueOf(line);
             }
@@ -97,6 +100,9 @@ public class TypesParser
      */
     public static VenueType parseVenueType(String line) throws InaproppriateParsingTypeException
     {
+        if ("".equals(line.trim()))
+            return null;
+
         for (VenueType type : VenueType.values())
 		{
             if (type.toString().equalsIgnoreCase(line))
