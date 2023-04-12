@@ -1,9 +1,7 @@
 package com.megateam.common.command.impl;
 
 import com.megateam.common.command.Command;
-import com.megateam.common.exception.CommandException;
-import com.megateam.common.exception.DatabaseException;
-import com.megateam.common.exception.FileException;
+import com.megateam.common.exception.*;
 import com.megateam.common.exception.impl.command.CommandExecutionFailedException;
 import com.megateam.common.util.Printer;
 
@@ -47,7 +45,7 @@ public class ExecuteScriptCommand extends Command
 			List<Command> resolvedScript = resolvingService.resolve(script);
 			return executionService.execute(resolvedScript);
 		}
-		catch (FileException e)
+		catch (ParsingException | ValidationException | FileException e)
 		{
 			printer.println(e.getMessage());
 		}
