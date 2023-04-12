@@ -16,6 +16,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Database implementation for storing tickets
+ */
 public class TicketDatabaseImpl implements Database<Ticket>
 {
 	/**
@@ -89,14 +92,15 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	@Override
 	public void add(@NonNull Ticket item) throws ElementIdAlreadyExistsException
 	{
-		Optional<Ticket> optionalTicket = tickets.stream()
-				.filter(ticket -> item.getId().equals(ticket.getId()))
-				.findFirst();
-
-		if (optionalTicket.isPresent())
-			throw new ElementIdAlreadyExistsException(
-					"Element with id " + optionalTicket.get().getId() + "already exists"
-			);
+//		TODO: remove unused code block
+//		Optional<Ticket> optionalTicket = tickets.stream()
+//				.filter(ticket -> item.getId().equals(ticket.getId()))
+//				.findFirst();
+//
+//		if (optionalTicket.isPresent())
+//			throw new ElementIdAlreadyExistsException(
+//					"Element with id " + optionalTicket.get().getId() + "already exists"
+//			);
 
 		item.setId(TicketIdGenerator.generateNewId());
 		item.getVenue().setId(VenueIdGenerator.generateNewId());
