@@ -42,6 +42,17 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	}
 
 	/**
+	 * This method retrieves amount of stored elements
+	 *
+	 * @return amount of stored elements
+	 */
+	@Override
+	public int size()
+	{
+		return tickets.size();
+	}
+
+	/**
 	 * This method retrieves creation date of the database
 	 *
 	 * @return database creation date
