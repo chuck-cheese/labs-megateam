@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * An implementation of dao for interacting with ticket database
+ */
 @RequiredArgsConstructor
 public class TicketDaoImpl implements Dao<Ticket>
 {
