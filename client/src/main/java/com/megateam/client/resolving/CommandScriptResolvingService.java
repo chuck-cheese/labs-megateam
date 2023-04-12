@@ -9,6 +9,7 @@ import com.megateam.common.data.validation.TicketValidator;
 import com.megateam.common.exception.CommandException;
 import com.megateam.common.exception.ParsingException;
 import com.megateam.common.exception.ValidationException;
+import com.megateam.common.exception.impl.command.CommandExecutionFailedException;
 import com.megateam.common.exception.impl.command.CommandResolvingFailedException;
 import com.megateam.common.resolving.ResolvingService;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +58,11 @@ public class CommandScriptResolvingService implements ResolvingService
 				);
 
 				Command command = commandFactory.newCommand(separatedCommandLine[0], args);
+
+				if (args.size() != command.getAmountOfArguments())
+				{
+					throw new CommandExecutionFailedException("Invalid amount of arguments. Check help for more info");
+				}
 
 				if (command instanceof ExecuteScriptCommand)
 				{
