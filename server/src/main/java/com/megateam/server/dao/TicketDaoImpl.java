@@ -19,7 +19,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketDaoImpl implements Dao<Ticket>
 {
+	/**
+	 * Ticket database instance
+	 */
 	private final Database<Ticket> database;
+
+	/**
+	 * This method retrieves amount of stored elements
+	 *
+	 * @return amount of stored elements
+	 */
+	@Override
+	public int size()
+	{
+		return database.size();
+	}
 
 	/**
 	 * This method retrieves creation date of the database

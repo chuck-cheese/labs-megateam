@@ -16,6 +16,13 @@ import java.util.List;
 public interface Dao<T>
 {
 	/**
+	 * This is an abstraction for method retrieves amount of stored elements
+	 *
+	 * @return amount of stored elements
+	 */
+	int size();
+
+	/**
 	 * This is an abstraction for method retrieves creation date of the database
 	 *
 	 * @return database creation date
