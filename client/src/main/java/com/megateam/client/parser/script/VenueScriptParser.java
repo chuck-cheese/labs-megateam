@@ -6,7 +6,6 @@ import com.megateam.common.data.util.VenueType;
 import com.megateam.common.data.validation.VenueValidator;
 import com.megateam.common.exception.ValidationException;
 import com.megateam.common.exception.impl.parsing.DataclassParsingException;
-import com.megateam.common.exception.impl.parsing.InaproppriateParsingTypeException;
 
 import java.util.Scanner;
 
@@ -28,16 +27,7 @@ public class VenueScriptParser
 		{
 			String name = scanner.nextLine();
 			Integer capacity = TypesParser.parseInteger(scanner.nextLine());
-
-			VenueType type;
-			try
-			{
-				type = TypesParser.parseVenueType(scanner.nextLine());
-			}
-			catch (InaproppriateParsingTypeException e)
-			{
-				type = null;
-			}
+			VenueType type = TypesParser.parseVenueType(scanner.nextLine());
 
 			Venue venue = new Venue(name, capacity, type);
 			VenueValidator.validateVenue(venue);
