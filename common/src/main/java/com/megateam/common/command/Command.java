@@ -39,6 +39,11 @@ public abstract class Command
 	protected Boolean RequiresElement;
 
 	/**
+	 * Amount of command arguments
+	 */
+	protected final int amountOfArguments;
+
+	/**
 	 * Ticket element is stored there if the command requires it
 	 */
 	@Setter
