@@ -4,7 +4,6 @@ import com.megateam.common.command.Command;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.exception.CommandException;
 import com.megateam.common.exception.DatabaseException;
-import com.megateam.common.exception.impl.command.CommandExecutionFailedException;
 import com.megateam.common.util.Printer;
 
 import java.util.List;
@@ -35,11 +34,6 @@ public class AddCommand extends Command
 	@Override
 	public boolean execute() throws CommandException, DatabaseException
 	{
-		if (arguments.size() != 0)
-		{
-			throw new CommandExecutionFailedException("Invalid amount of arguments. Check help for more info");
-		}
-
 		dao.add((Ticket) additionalArgument);
 		printer.println("New element successfully added");
 		return true;

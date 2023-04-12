@@ -2,7 +2,6 @@ package com.megateam.common.command.impl;
 
 import com.megateam.common.command.Command;
 import com.megateam.common.exception.*;
-import com.megateam.common.exception.impl.command.CommandExecutionFailedException;
 import com.megateam.common.util.Printer;
 
 import java.io.File;
@@ -34,11 +33,6 @@ public class ExecuteScriptCommand extends Command
 	@Override
 	public boolean execute() throws CommandException, DatabaseException
 	{
-		if (arguments.size() != 1)
-		{
-			throw new CommandExecutionFailedException("Invalid amount of arguments. Check help for more info");
-		}
-
 		try
 		{
 			File script = fms.getFileByName(arguments.get(0));

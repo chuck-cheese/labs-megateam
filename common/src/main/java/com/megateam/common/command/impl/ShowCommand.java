@@ -2,7 +2,6 @@ package com.megateam.common.command.impl;
 
 import com.megateam.common.command.Command;
 import com.megateam.common.exception.CommandException;
-import com.megateam.common.exception.impl.command.CommandExecutionFailedException;
 import com.megateam.common.util.Printer;
 
 import java.util.List;
@@ -31,11 +30,6 @@ public class ShowCommand extends Command
 	@Override
 	public boolean execute() throws CommandException
 	{
-		if (arguments.size() != 0)
-		{
-			throw new CommandExecutionFailedException("Invalid amount of arguments. Check help for more info");
-		}
-
 		printer.printList(dao.findAll());
 		return true;
 	}
