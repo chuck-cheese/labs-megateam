@@ -9,3 +9,6 @@ build
 
 # Ignoring MacOS files
 .DS_Store
+
+# Ignoring application scripts
+*.script
