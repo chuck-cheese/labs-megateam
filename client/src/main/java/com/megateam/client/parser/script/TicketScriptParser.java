@@ -1,6 +1,6 @@
 package com.megateam.client.parser.script;
 
-import com.megateam.client.parser.TypesParser;
+import com.megateam.common.util.TypesParser;
 import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.data.Venue;
