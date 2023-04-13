@@ -1,4 +1,4 @@
-package com.megateam.client.parser;
+package com.megateam.common.util;
 
 import com.megateam.common.data.util.TicketType;
 import com.megateam.common.data.util.VenueType;
