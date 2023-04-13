@@ -40,9 +40,11 @@ public class CommandFactory
 			case "info" -> new InfoCommand(args, printer);
 			case "show" -> new ShowCommand(args, printer);
 			case "add" -> new AddCommand(args, printer);
+			case "update" -> new UpdateCommand(args, printer); // TODO: to be fixed: check id existence in the db
+			case "remove_by_id" -> new RemoveByIdCommand(args, printer);
+
 			case "execute_script" -> new ExecuteScriptCommand(args, printer);
 			case "exit" -> new ExitCommand(args, printer);
-			case "update" -> new UpdateCommand(args, printer);
 //			TODO: implement other commands in the same way
 
 			default -> throw new CommandNotFoundException("Command '" + commandName + "' not found");
