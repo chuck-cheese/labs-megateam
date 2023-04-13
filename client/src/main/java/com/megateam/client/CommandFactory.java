@@ -43,6 +43,7 @@ public class CommandFactory
 			case "update" -> new UpdateCommand(args, printer); // TODO: to be fixed: check id existence in the db
 			case "remove_by_id" -> new RemoveByIdCommand(args, printer);
 			case "clear" -> new ClearCommand(args, printer);
+//			case "save" -> TODO: implement db saving and implement this command
 
 			case "execute_script" -> new ExecuteScriptCommand(args, printer);
 			case "exit" -> new ExitCommand(args, printer);
