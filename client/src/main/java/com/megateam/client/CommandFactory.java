@@ -44,9 +44,10 @@ public class CommandFactory
 			case "remove_by_id" -> new RemoveByIdCommand(args, printer);
 			case "clear" -> new ClearCommand(args, printer);
 //			case "save" -> TODO: implement db saving and implement this command
-
 			case "execute_script" -> new ExecuteScriptCommand(args, printer);
 			case "exit" -> new ExitCommand(args, printer);
+			case "remove_first" -> new RemoveFirstCommand(args, printer);
+			
 //			TODO: implement other commands in the same way
 
 			default -> throw new CommandNotFoundException("Command '" + commandName + "' not found");
