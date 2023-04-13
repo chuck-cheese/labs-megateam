@@ -51,8 +51,7 @@ public class CommandFactory
 			case "remove_lower" -> new RemoveLowerCommand(args, printer);
 			case "remove_any_by_refundable" -> new RemoveAnyByRefundableCommand(args, printer);
 			case "filter_less_than_type" -> new FilterLessThanTypeCommand(args, printer);
-
-//			TODO: implement other commands in the same way
+			case "print_field_descending_price" -> new PrintFieldDescendingPriceCommand(args, printer);
 
 			default -> throw new CommandNotFoundException("Command '" + commandName + "' not found");
 		};
