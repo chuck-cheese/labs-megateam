@@ -47,7 +47,8 @@ public class CommandFactory
 			case "execute_script" -> new ExecuteScriptCommand(args, printer);
 			case "exit" -> new ExitCommand(args, printer);
 			case "remove_first" -> new RemoveFirstCommand(args, printer);
-			
+			case "remove_last" -> new RemoveLastCommand(args, printer);
+
 //			TODO: implement other commands in the same way
 
 			default -> throw new CommandNotFoundException("Command '" + commandName + "' not found");
