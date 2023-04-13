@@ -48,6 +48,7 @@ public class CommandFactory
 			case "exit" -> new ExitCommand(args, printer);
 			case "remove_first" -> new RemoveFirstCommand(args, printer);
 			case "remove_last" -> new RemoveLastCommand(args, printer);
+			case "remove_lower" -> new RemoveLowerCommand(args, printer);
 
 //			TODO: implement other commands in the same way
 
