@@ -50,6 +50,7 @@ public class CommandFactory
 			case "remove_last" -> new RemoveLastCommand(args, printer);
 			case "remove_lower" -> new RemoveLowerCommand(args, printer);
 			case "remove_any_by_refundable" -> new RemoveAnyByRefundableCommand(args, printer);
+			case "filter_less_than_type" -> new FilterLessThanTypeCommand(args, printer);
 
 //			TODO: implement other commands in the same way
 
