@@ -19,7 +19,7 @@ public class FileManipulationService
 	 * @param file file for validation
 	 * @throws FileNotWritableException if file is not writable
 	 */
-	private void validateFileIsWritable(File file) throws FileNotWritableException
+	public void validateFileIsWritable(File file) throws FileNotWritableException
 	{
 		if (!Files.isWritable(file.toPath()))
 			throw new FileNotWritableException("Specified file is not writable");
@@ -31,7 +31,7 @@ public class FileManipulationService
 	 * @param file file for validation
 	 * @throws FileNotReadableException if file is not readable
 	 */
-	private void validateFileIsReadable(File file) throws FileNotReadableException
+	public void validateFileIsReadable(File file) throws FileNotReadableException
 	{
 		if (!Files.isReadable(file.toPath()))
 			throw new FileNotReadableException("Specified file is not readable");
@@ -43,7 +43,7 @@ public class FileManipulationService
 	 * @param file file for validation
 	 * @throws FileNotExistsException if file does not exist
 	 */
-	private void validateFileExists(File file) throws FileNotExistsException
+	public void validateFileExists(File file) throws FileNotExistsException
 	{
 		if (!file.exists())
 			throw new FileNotExistsException("Specified file does not exists");
