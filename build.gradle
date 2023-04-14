@@ -47,7 +47,6 @@ dependencies {
 
 jar {
     manifest {
-//        attributes 'Main-Class': 'com.megateam.client.Client'
         attributes 'Main-Class': 'com.megateam.lab.Main'
     }
 
@@ -63,7 +62,7 @@ jar {
 tasks.register("allJavadoc", Javadoc) {
     source subprojects.collect { it.sourceSets.main.allJava }
     classpath = files(subprojects.collect {it.sourceSets.main.compileClasspath })
-    destinationDir = file("${buildDir}/docs/javadoc")
+    destinationDir = file("${projectDir}/docs")
 }
 
 build.finalizedBy(allJavadoc)
