@@ -53,11 +53,11 @@ jobs:
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc
+          javadoc-branch: documentation
           java-version: 17
           project: gradle
-          custom-command: ./gradlew allJavadoc
           target-folder: docs
+          custom-command: ./gradlew allJavadoc
 
   notification:
     runs-on: ubuntu-latest
