@@ -28,12 +28,12 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	/**
 	 * The database creation date
 	 */
-	private final LocalDateTime creationDate;
+	private LocalDateTime creationDate;
 
 	/**
 	 * A storage for all the tickets
 	 */
-	private final List<Ticket> tickets;
+	private List<Ticket> tickets;
 
 //	TODO: remove redundant code block
 //	/**
@@ -52,8 +52,7 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	 */
 	public TicketDatabaseImpl(DatabaseSavingService savingService)
 	{
-		this.creationDate = LocalDateTime.now(ZoneId.systemDefault());
-		this.tickets = new ArrayList<>();
+		initEmptyDb();
 		this.savingService = savingService;
 	}
 
@@ -219,7 +218,23 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	@Override
 	public void load() throws UnableToLoadDatabaseException
 	{
-//		TODO: implement collection loading
+		try
+		{
+			TicketDatabaseDataclass dataclass = savingService.load();
+			this.creationDate = dataclass.getCreationDate();
+			this.tickets = dataclass.getData();
+		}
+		catch (FileException | DatabaseException e)
+		{
+			throw new UnableToLoadDatabaseException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void initEmptyDb()
+	{
+		this.creationDate = LocalDateTime.now(ZoneId.systemDefault());
+		this.tickets = new ArrayList<>();
 	}
 
 	/**

@@ -89,6 +89,11 @@ public interface Database<T>
 	void load() throws UnableToLoadDatabaseException;
 
 	/**
+	 * This method is an abstraction for method that inits an empty database
+	 */
+	void initEmptyDb();
+
+	/**
 	 * This is an abstraction for method that removes the first element from the database
 	 *
 	 * @throws ElementNotFoundException if required element not found

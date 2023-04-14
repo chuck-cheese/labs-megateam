@@ -1,8 +1,12 @@
 package com.megateam.server.database;
 
+import com.megateam.common.data.Ticket;
 import com.megateam.common.data.util.LocalDateTimeAdapter;
+import com.megateam.common.data.validation.TicketValidator;
 import com.megateam.common.exception.DatabaseException;
 import com.megateam.common.exception.FileException;
+import com.megateam.common.exception.ValidationException;
+import com.megateam.common.exception.impl.database.UnableToLoadDatabaseException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
 import com.megateam.common.exception.impl.file.FileNotExistsException;
 import com.megateam.common.util.FileManipulationService;
@@ -12,9 +16,12 @@ import lombok.RequiredArgsConstructor;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import javax.xml.bind.Unmarshaller;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Class for saving database into a file
@@ -36,6 +43,11 @@ public class DatabaseSavingService
 	 * JAXB marshaller instance
 	 */
 	private final Marshaller xmlMarshaller;
+
+	/**
+	 * JAXB unmarshaller instance
+	 */
+	private final Unmarshaller xmlUnmarshaller;
 
 	/**
 	 * Database saving method
@@ -80,9 +92,65 @@ public class DatabaseSavingService
 	 *
 	 * @return ticket database dataclass instance
 	 */
-	public TicketDatabaseDataclass load()
+	public TicketDatabaseDataclass load() throws FileException, DatabaseException
 	{
-		return null;
-//		TODO: implement db loading
+		fms.validateFileExists(savingFile);
+		fms.validateFileIsWritable(savingFile);
+
+		try
+		{
+			xmlUnmarshaller.setAdapter(new LocalDateTimeAdapter());
+
+			BufferedReader reader = new BufferedReader(new FileReader(savingFile));
+			TicketDatabaseDataclass databaseDataclass = (TicketDatabaseDataclass) xmlUnmarshaller.unmarshal(reader);
+
+			if (databaseDataclass.getCreationDate() == null)
+			{
+				throw new UnableToLoadDatabaseException(
+						"Unable to load the database. Database creation date is incorrect."
+				);
+			}
+
+			Set<Integer> usedIds = new HashSet<>();
+			List<Ticket> elements = databaseDataclass.getData();
+			List<Ticket> correctElements = new ArrayList<>();
+
+			for (Ticket element : elements)
+			{
+				if (element.getId() == null || usedIds.contains(element.getId()))
+				{
+					throw new UnableToLoadDatabaseException(
+							"Unable to load the database. Elements should have unique ids"
+					);
+				}
+
+				try
+				{
+					TicketValidator.validateTicket(element);
+					usedIds.add(element.getId());
+					correctElements.add(element);
+				}
+				catch (ValidationException e)
+				{
+					throw new UnableToLoadDatabaseException(
+							"Unable to load the database. Some of the stored elements is corrupted"
+					);
+				}
+			}
+
+			return new TicketDatabaseDataclass(databaseDataclass.getCreationDate(), correctElements);
+		}
+		catch (FileNotFoundException e)
+		{
+			throw new FileNotExistsException(
+					"Specified saving file does not exist"
+			);
+		}
+		catch (JAXBException e)
+		{
+			throw new UnableToSaveDatabaseException(
+					"It's unable to load the database. Something went wrong with unmarshaller"
+			);
+		}
 	}
 }
