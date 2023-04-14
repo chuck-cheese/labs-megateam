@@ -3,6 +3,7 @@ package com.megateam.server.database;
 import com.megateam.common.data.util.TicketType;
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
 import com.megateam.common.exception.impl.database.ElementNotFoundException;
+import com.megateam.common.exception.impl.database.UnableToLoadDatabaseException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
 import lombok.NonNull;
 
@@ -79,6 +80,13 @@ public interface Database<T>
 	 * @throws UnableToSaveDatabaseException if something went wrong during the database saving
 	 */
 	void save() throws UnableToSaveDatabaseException;
+
+	/**
+	 * This is an abstraction for method that loads the collection to a file
+	 *
+	 * @throws UnableToLoadDatabaseException if something went wrong during the database loading
+	 */
+	void load() throws UnableToLoadDatabaseException;
 
 	/**
 	 * This is an abstraction for method that removes the first element from the database
