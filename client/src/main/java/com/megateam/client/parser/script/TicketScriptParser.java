@@ -23,6 +23,7 @@ public class TicketScriptParser
      * Parse ticket from script
      *
      * @param scanner script scanner for ticket scanning
+	 * @param mode ticket resolving mode
      * @return ticket instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */

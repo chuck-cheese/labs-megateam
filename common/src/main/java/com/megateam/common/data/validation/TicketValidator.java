@@ -56,6 +56,7 @@ public class TicketValidator
 	 *
 	 * @param price ticket price
 	 * @throws BoundValidationException if ticket price is less than or equal to zero
+	 * @throws NullValidationException if ticket price is null
 	 */
 	public static void validateTicketPrice(Float price) throws BoundValidationException, NullValidationException
 	{

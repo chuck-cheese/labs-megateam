@@ -53,6 +53,8 @@ public class DatabaseSavingService
 	 * Database saving method
 	 *
 	 * @param databaseDataclass ticket database wrapper instance
+	 * @throws FileException if something went wrong during file operations
+	 * @throws DatabaseException if something went wrong during database operations
 	 */
 	public void save(TicketDatabaseDataclass databaseDataclass) throws FileException, DatabaseException
 	{
@@ -91,6 +93,8 @@ public class DatabaseSavingService
 	 * Database loading method
 	 *
 	 * @return ticket database dataclass instance
+	 * @throws FileException if something went wrong during file operations
+	 * @throws DatabaseException if something went wrong during database operations
 	 */
 	public TicketDatabaseDataclass load() throws FileException, DatabaseException
 	{

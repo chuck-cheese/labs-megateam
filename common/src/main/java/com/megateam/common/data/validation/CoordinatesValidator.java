@@ -14,6 +14,7 @@ public class CoordinatesValidator
 	 *
 	 * @param x x coordinate
 	 * @throws BoundValidationException if x coordinate is less or equal to -390 or is an infinity
+	 * @throws NullValidationException if x coordinate is null
 	 */
 	public static void validateXCoord(Float x) throws BoundValidationException, NullValidationException
 	{
@@ -43,7 +44,7 @@ public class CoordinatesValidator
 	 *
 	 * @param coordinates coordinates object under validation
 	 * @throws BoundValidationException if x coordinate is less or equal to -390 or is an infinity
-	 * @throws NullValidationException if y coordinate is null
+	 * @throws NullValidationException if coordinates instance is null
 	 */
 	public static void validateCoordinates(Coordinates coordinates) throws BoundValidationException, NullValidationException
 	{

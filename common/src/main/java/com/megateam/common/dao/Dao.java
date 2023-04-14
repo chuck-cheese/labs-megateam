@@ -49,6 +49,7 @@ public interface Dao<T>
 	 * This is an abstraction for method that provides an ability to add new element into the database
 	 *
 	 * @param item the new element which should be added into the database
+	 * @throws ElementIdAlreadyExistsException if trying to add new element with existing id
 	 */
 	void add(@NonNull T item) throws ElementIdAlreadyExistsException;
 

@@ -46,6 +46,8 @@ public class TicketDatabaseImpl implements Database<Ticket>
 
 	/**
 	 * TicketDatabaseImpl constructor
+	 *
+	 * @param savingService database saving service instance
 	 */
 	public TicketDatabaseImpl(DatabaseSavingService savingService)
 	{

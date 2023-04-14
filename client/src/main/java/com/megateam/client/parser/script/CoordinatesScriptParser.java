@@ -18,6 +18,7 @@ public class CoordinatesScriptParser
      * Parse coordinates from strings
      *
      * @param scanner scanner instance
+	 * @param mode coordinates resolving mode
      * @return coordinates instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */

@@ -19,6 +19,7 @@ public class VenueScriptParser
      * Parse venue from strings
      *
      * @param scanner script scanner
+	 * @param mode venue resolving mode
      * @return venue instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */
