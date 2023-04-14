@@ -59,7 +59,7 @@ public class TicketValidator
 	 */
 	public static void validateTicketPrice(float price) throws BoundValidationException
 	{
-		if (price <= 0) throw new BoundValidationException("Ticket price should be greater than zero.");
+		if (Float.compare(price, 0) <= 0) throw new BoundValidationException("Ticket price should be greater than zero");
 	}
 
 	/**
