@@ -1,9 +1,12 @@
 package com.megateam.server.database;
 
+import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.Ticket;
+import com.megateam.common.data.Venue;
 import com.megateam.common.data.util.TicketIdGenerator;
 import com.megateam.common.data.util.TicketType;
 import com.megateam.common.data.util.VenueIdGenerator;
+import com.megateam.common.data.util.VenueType;
 import com.megateam.common.exception.DatabaseException;
 import com.megateam.common.exception.FileException;
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
@@ -153,9 +156,34 @@ public class TicketDatabaseImpl implements Database<Ticket>
 				"Element with id " + id + " not found"
 			);
 
-		tickets.remove(optionalTicket.get());
-		item.setId(id);
-		tickets.add(item);
+		Ticket existingTicket = optionalTicket.get();
+
+		String ticketName = (item.getName() == null) ? existingTicket.getName() : item.getName();
+		Float xCoord = (item.getCoordinates().getX() == null) ?
+				existingTicket.getCoordinates().getX() : item.getCoordinates().getX();
+		Integer yCoord = (item.getCoordinates().getY() == null) ?
+				existingTicket.getCoordinates().getY() : item.getCoordinates().getY();
+		LocalDateTime ticketCreationDate = existingTicket.getCreationDate();
+		Float price = (item.getPrice() == null) ? existingTicket.getPrice() : item.getPrice();
+		String comment = (item.getComment() == null) ? existingTicket.getComment() : item.getComment();
+		Boolean refundable = (item.getRefundable() == null) ? existingTicket.getRefundable() : item.getRefundable();
+		TicketType ticketType = (item.getType() == null) ? existingTicket.getType() : item.getType();
+
+		String venueName = (item.getVenue().getName() == null) ?
+				existingTicket.getVenue().getName() : item.getVenue().getName();
+		Integer venueCapacity = (item.getVenue().getCapacity() == null) ?
+				existingTicket.getVenue().getCapacity() : item.getVenue().getCapacity();
+		VenueType venueType = (item.getVenue().getType() == null) ?
+				existingTicket.getVenue().getType() : item.getVenue().getType();
+
+		Coordinates coordinates = new Coordinates(xCoord, yCoord);
+		Venue venue = new Venue(existingTicket.getVenue().getId(), venueName, venueCapacity, venueType);
+		Ticket newTicket = new Ticket(
+				id, ticketName, coordinates, ticketCreationDate, price, comment, refundable, ticketType, venue
+		);
+
+		tickets.remove(existingTicket);
+		tickets.add(newTicket);
 	}
 
 	/**
