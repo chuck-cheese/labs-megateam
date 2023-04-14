@@ -40,7 +40,7 @@ public class CommandFactory
 			case "info" -> new InfoCommand(args, printer);
 			case "show" -> new ShowCommand(args, printer);
 			case "add" -> new AddCommand(args, printer);
-			case "update" -> new UpdateCommand(args, printer); // TODO: to be fixed: check id existence in the db
+			case "update" -> new UpdateCommand(args, printer);
 			case "remove_by_id" -> new RemoveByIdCommand(args, printer);
 			case "clear" -> new ClearCommand(args, printer);
 			case "save" -> new SaveCommand(args, printer);

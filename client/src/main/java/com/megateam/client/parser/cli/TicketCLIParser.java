@@ -265,13 +265,6 @@ public class TicketCLIParser
             proposeContinue();
             return parseTicketType();
         }
-//		TODO: remove unused code block
-//		catch (Exception e)
-//		{
-//            printer.println(e.getMessage());
-//            proposeContinue();
-//            return parseTicketType();
-//        }
     }
 
     /**

@@ -174,13 +174,6 @@ public class VenueCLIParser
             proposeContinue();
             return parseVenueType();
         }
-//		TODO: remove unused code block
-//		catch (ValidationException e)
-//		{
-//            printer.println(e.getMessage());
-//            proposeContinue();
-//            return parseVenueType();
-//        }
     }
 
     /**

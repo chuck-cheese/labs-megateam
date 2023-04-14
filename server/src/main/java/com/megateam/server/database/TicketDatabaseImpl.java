@@ -38,12 +38,6 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	 */
 	private List<Ticket> tickets;
 
-//	TODO: remove redundant code block
-//	/**
-//	 * File manipulation service instance
-//	 */
-//	private final FileManipulationService fms;
-
 	/**
 	 * Database saving service instance
 	 */
@@ -121,16 +115,6 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	@Override
 	public void add(@NonNull Ticket item) throws ElementIdAlreadyExistsException
 	{
-//		TODO: remove unused code block
-//		Optional<Ticket> optionalTicket = tickets.stream()
-//				.filter(ticket -> item.getId().equals(ticket.getId()))
-//				.findFirst();
-//
-//		if (optionalTicket.isPresent())
-//			throw new ElementIdAlreadyExistsException(
-//					"Element with id " + optionalTicket.get().getId() + "already exists"
-//			);
-
 		item.setId(TicketIdGenerator.generateNewId());
 		item.getVenue().setId(VenueIdGenerator.generateNewId());
 
