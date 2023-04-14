@@ -6,7 +6,9 @@ import com.megateam.common.data.util.TicketType;
 import com.megateam.common.data.util.VenueIdGenerator;
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
 import com.megateam.common.exception.impl.database.ElementNotFoundException;
+import com.megateam.common.exception.impl.database.UnableToLoadDatabaseException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
+import com.megateam.common.util.FileManipulationService;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
@@ -31,14 +33,20 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	 */
 	private final List<Ticket> tickets;
 
+	/**
+	 * File manipulation service instance
+	 */
+	private final FileManipulationService fms;
+
 
 	/**
 	 * TicketDatabaseImpl constructor
 	 */
-	public TicketDatabaseImpl()
+	public TicketDatabaseImpl(FileManipulationService fms)
 	{
 		this.creationDate = LocalDateTime.now(ZoneId.systemDefault());
 		this.tickets = new ArrayList<>();
+		this.fms = fms;
 	}
 
 	/**
@@ -186,6 +194,17 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	public void save() throws UnableToSaveDatabaseException
 	{
 //		TODO: implement collection saving
+	}
+
+	/**
+	 * This method loads the collection to a file
+	 *
+	 * @throws UnableToLoadDatabaseException if something went wrong during the database loading
+	 */
+	@Override
+	public void load() throws UnableToLoadDatabaseException
+	{
+//		TODO: implement collection loading
 	}
 
 	/**
