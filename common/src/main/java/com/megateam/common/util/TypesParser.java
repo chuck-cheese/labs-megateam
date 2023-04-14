@@ -9,6 +9,21 @@ import com.megateam.common.exception.impl.parsing.InaproppriateParsingTypeExcept
  */
 public class TypesParser
 {
+
+    /**
+     * Parse string from string
+     *
+     * @param line parsing string
+     * @return parsed string
+     */
+    public static String parseString(String line)
+    {
+        if ("".equals(line.trim()))
+            return null;
+
+        return line.trim();
+    }
+
 	/**
      * Parse integer from string
      *
@@ -17,6 +32,9 @@ public class TypesParser
      * @throws InaproppriateParsingTypeException if parsing not succeed
      */
     public static Integer parseInteger(String line) throws InaproppriateParsingTypeException {
+        if ("".equals(line.trim()))
+            return null;
+
         try
         {
             return Integer.parseInt(line);
@@ -53,6 +71,9 @@ public class TypesParser
      * @throws InaproppriateParsingTypeException if parsing not succeed
      */
     public static Boolean parseBoolean(String line) throws InaproppriateParsingTypeException {
+
+        if ("".equals(line.trim()))
+            return null;
 
         if ("true".equalsIgnoreCase(line))
 		{
@@ -125,6 +146,9 @@ public class TypesParser
      */
     public static Float parseFloat(String line) throws InaproppriateParsingTypeException
     {
+        if ("".equals(line.trim()))
+            return null;
+
         try
         {
             return Float.parseFloat(line);

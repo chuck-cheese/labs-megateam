@@ -31,45 +31,39 @@ public class Ticket implements Comparable<Ticket>
 	/**
 	 * This fields contains ticket name
 	 */
-	@NonNull
 	@XmlAttribute(name = "ticketName", required = true)
-	private String name;
+	private final String name;
 
 	/**
 	 * This field contains ticket coordinates
 	 */
-	@NonNull
 	@XmlElement(name = "ticketCoordinates", required = true)
-	private Coordinates coordinates;
+	private final Coordinates coordinates;
 
 	/**
 	 * This field contains ticket creation date
 	 */
-	@NonNull
 	@XmlElement(name = "ticketCreationDate", required = true)
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
-	private LocalDateTime creationDate;
+	private final LocalDateTime creationDate;
 
 	/**
 	 * This field contains ticket price
 	 */
-	@NonNull
 	@XmlElement(name = "ticketPrice", required = true)
-	private float price;
+	private final Float price;
 
 	/**
 	 * This field contains ticket comment
 	 */
-	@NonNull
 	@XmlElement(name = "ticketComment", required = true)
-	private String comment;
+	private final String comment;
 
 	/**
 	 * This field contains ticket refundable status
 	 */
-	@NonNull
 	@XmlElement(name = "refundable", required = true)
-	private Boolean refundable;
+	private final Boolean refundable;
 
 	/**
 	 * This field contains ticket type (can be null)
@@ -80,9 +74,8 @@ public class Ticket implements Comparable<Ticket>
 	/**
 	 * This field contains ticket venue
 	 */
-	@NonNull
 	@XmlElement(name = "ticketVenue", required = true)
-	private Venue venue;
+	private final Venue venue;
 
 	/**
 	 * This method returns a comparison result for this object and the specified one

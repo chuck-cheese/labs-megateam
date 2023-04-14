@@ -22,16 +22,14 @@ public class Coordinates
 	/**
 	 * This field contains X coordinate
 	 */
-	@NonNull
 	@XmlElement(name = "xCoord", required = true)
-	private float x;
+	private final Float x;
 
 	/**
 	 * This field contains Y coordinate
 	 */
-	@NonNull
 	@XmlElement(name = "yCoord", required = true)
-	private Integer y;
+	private final Integer y;
 
 	/**
 	 * This method provides access to a string representation of coordinates class object

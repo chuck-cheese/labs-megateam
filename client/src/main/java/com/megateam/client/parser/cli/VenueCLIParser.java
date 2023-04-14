@@ -1,5 +1,6 @@
 package com.megateam.client.parser.cli;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.data.Venue;
 import com.megateam.common.data.util.VenueType;
 import com.megateam.common.data.validation.VenueValidator;
@@ -7,6 +8,7 @@ import com.megateam.common.exception.ValidationException;
 import com.megateam.common.exception.impl.parsing.UserInterruptedException;
 import com.megateam.common.util.Printer;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -26,6 +28,12 @@ public class VenueCLIParser
 	 * Scanner instance
 	 */
 	private final Scanner scanner;
+
+    /**
+	 * Parser resolving mode
+	 */
+	@Setter
+	private ResolvingMode mode;
 
 
 	/**
@@ -58,11 +66,18 @@ public class VenueCLIParser
 
         if ("".equals(userInput))
 		{
-            printer.println(
+            if (mode == ResolvingMode.CREATE)
+            {
+				printer.println(
                     "You're not able to insert a null value for this variable. Try another value"
-            );
-            proposeContinue();
-            return parseVenueName();
+	            );
+	            proposeContinue();
+	            return parseVenueName();
+            }
+			else
+            {
+				return null;
+            }
         }
 
         try
@@ -95,9 +110,16 @@ public class VenueCLIParser
 
         if ("".equals(userInput))
 		{
-            printer.println("This variable cannot be null. Try another value.");
-            proposeContinue();
-            return parseVenueCapacity();
+            if (mode == ResolvingMode.CREATE)
+            {
+				printer.println("This variable cannot be null. Try another value.");
+	            proposeContinue();
+	            return parseVenueCapacity();
+            }
+			else
+            {
+				return null;
+            }
         }
 
         try

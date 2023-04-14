@@ -1,10 +1,12 @@
 package com.megateam.client.parser.cli;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.validation.CoordinatesValidator;
 import com.megateam.common.exception.impl.parsing.UserInterruptedException;
 import com.megateam.common.util.Printer;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.Scanner;
 
@@ -25,6 +27,12 @@ public class CoordinatesCLIParser
 	private final Scanner scanner;
 
 	/**
+	 * Parser resolving mode
+	 */
+	@Setter
+	private ResolvingMode mode;
+
+	/**
      * Offers an ability to interrupt data input
      *
      * @throws UserInterruptedException if got not y/Y from user
@@ -43,7 +51,7 @@ public class CoordinatesCLIParser
      * @return float variable of X coordinate
      * @throws UserInterruptedException if got not y/Y from user
      */
-    private float parseXCoord() throws UserInterruptedException {
+    private Float parseXCoord() throws UserInterruptedException {
 
         printer.print("Enter X coordinate (float & greater than -390): ");
 
@@ -53,10 +61,17 @@ public class CoordinatesCLIParser
         String userInput = scanner.nextLine().trim();
 
         if ("".equals(userInput)) {
-            printer.println(
+			if (mode == ResolvingMode.CREATE)
+			{
+				printer.println(
                     "You're not able to insert a null value for float variable. Try another value.");
-            proposeContinue();
-            return parseXCoord();
+	            proposeContinue();
+	            return parseXCoord();
+			}
+			else
+			{
+				return null;
+			}
         }
 
         try
@@ -95,9 +110,16 @@ public class CoordinatesCLIParser
 
         if ("".equals(userInput))
 		{
-            printer.println("This variable cannot be null. Try another value.");
-            proposeContinue();
-            return parseYCoord();
+			if (mode == ResolvingMode.CREATE)
+			{
+				printer.println("This variable cannot be null. Try another value.");
+                proposeContinue();
+                return parseYCoord();
+			}
+			else
+			{
+				return null;
+			}
         }
 
         try
@@ -128,7 +150,7 @@ public class CoordinatesCLIParser
      */
     public Coordinates parseCoordinates() throws UserInterruptedException {
         printer.println("#### ENTERING COORDINATES ####");
-        float x = parseXCoord();
+        Float x = parseXCoord();
         Integer y = parseYCoord();
         printer.println("#### ENTERING COORDINATES ENDED ####");
 

@@ -4,6 +4,7 @@ import com.megateam.client.CommandFactory;
 import com.megateam.client.parser.script.TicketScriptParser;
 import com.megateam.common.command.Command;
 import com.megateam.common.command.impl.ExecuteScriptCommand;
+import com.megateam.common.command.impl.UpdateCommand;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.data.validation.TicketValidator;
 import com.megateam.common.exception.CommandException;
@@ -64,25 +65,27 @@ public class CommandScriptResolvingService implements ResolvingService
 					throw new CommandExecutionFailedException("Invalid amount of arguments. Check help for more info");
 				}
 
+				if (command.getRequiresElement())
+				{
+					Ticket ticket;
+
+					if (!(command instanceof UpdateCommand))
+					{
+						ticket = TicketScriptParser.parseTicket(scanner, ResolvingMode.CREATE);
+						TicketValidator.validateTicket(ticket);
+					}
+					else
+					{
+						ticket = TicketScriptParser.parseTicket(scanner, ResolvingMode.UPDATE);
+					}
+					command.setAdditionalArgument(ticket);
+				}
+
 				if (command instanceof ExecuteScriptCommand)
 				{
 					command.setResolvingService(this);
 				}
 
-				if (command.getRequiresElement())
-				{
-//					TODO: remove commented code block
-//					try
-//					{
-					Ticket ticket = TicketScriptParser.parseTicket(scanner);
-					TicketValidator.validateTicket(ticket);
-					command.setAdditionalArgument(ticket);
-//					}
-//					catch (ParsingException e)
-//					{
-//						throw new CommandResolvingFailedException("Command arguments resolving failed: " + e.getMessage());
-//					}
-				}
 				resolvedCommands.add(command);
 			}
 			return resolvedCommands;

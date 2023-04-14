@@ -28,16 +28,14 @@ public class Venue
 	/**
 	 * This field contains venue name
 	 */
-	@NonNull
 	@XmlElement(name = "venueName", required = true)
-	private String name;
+	private final String name;
 
 	/**
 	 * This field contains venue capacity
 	 */
-	@NonNull
 	@XmlElement(name = "capacity", required = true)
-	private Integer capacity;
+	private final Integer capacity;
 
 	/**
 	 * This field contains venue type (can be null)

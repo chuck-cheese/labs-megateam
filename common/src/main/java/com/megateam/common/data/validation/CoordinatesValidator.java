@@ -15,8 +15,10 @@ public class CoordinatesValidator
 	 * @param x x coordinate
 	 * @throws BoundValidationException if x coordinate is less or equal to -390 or is an infinity
 	 */
-	public static void validateXCoord(float x) throws BoundValidationException
+	public static void validateXCoord(Float x) throws BoundValidationException, NullValidationException
 	{
+		if (x == null) throw new NullValidationException("X coordinate cannot be null");
+
 		if (Float.compare(x, -390) <= 0)
 			throw new BoundValidationException("X coordinate should be greater than -390");
 
@@ -49,6 +51,6 @@ public class CoordinatesValidator
 			throw new NullValidationException("Coordinates cannot be null");
 
 		validateXCoord(coordinates.getX());
-		validateXCoord(coordinates.getY());
+		validateYCoord(coordinates.getY());
 	}
 }

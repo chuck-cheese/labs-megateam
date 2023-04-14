@@ -1,5 +1,6 @@
 package com.megateam.client.parser.script;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.util.TypesParser;
 import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.validation.CoordinatesValidator;
@@ -20,16 +21,20 @@ public class CoordinatesScriptParser
      * @return coordinates instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */
-    public static Coordinates parseCoordinates(Scanner scanner) throws DataclassParsingException
+    public static Coordinates parseCoordinates(Scanner scanner, ResolvingMode mode) throws DataclassParsingException
     {
 		try
 		{
-			float x = TypesParser.parseFloat(scanner.nextLine());
+			Float x = TypesParser.parseFloat(scanner.nextLine());
 			Integer y = TypesParser.parseInteger(scanner.nextLine());
 
 			Coordinates coordinates = new Coordinates(x, y);
 
-	        CoordinatesValidator.validateCoordinates(coordinates);
+	        if (mode == ResolvingMode.CREATE)
+	        {
+				CoordinatesValidator.validateCoordinates(coordinates);
+	        }
+
             return coordinates;
 		}
 		catch (ValidationException e)

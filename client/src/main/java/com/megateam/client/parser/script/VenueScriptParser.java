@@ -1,5 +1,6 @@
 package com.megateam.client.parser.script;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.util.TypesParser;
 import com.megateam.common.data.Venue;
 import com.megateam.common.data.util.VenueType;
@@ -21,16 +22,20 @@ public class VenueScriptParser
      * @return venue instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */
-    public static Venue parseVenue(Scanner scanner) throws DataclassParsingException
+    public static Venue parseVenue(Scanner scanner, ResolvingMode mode) throws DataclassParsingException
     {
 		try
 		{
-			String name = scanner.nextLine();
+			String name = TypesParser.parseString(scanner.nextLine());
 			Integer capacity = TypesParser.parseInteger(scanner.nextLine());
 			VenueType type = TypesParser.parseVenueType(scanner.nextLine());
 
 			Venue venue = new Venue(name, capacity, type);
-			VenueValidator.validateVenue(venue);
+
+			if (mode == ResolvingMode.CREATE)
+			{
+				VenueValidator.validateVenue(venue);
+			}
 
 			return venue;
 		}

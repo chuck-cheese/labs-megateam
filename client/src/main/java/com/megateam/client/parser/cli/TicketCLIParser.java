@@ -1,5 +1,6 @@
 package com.megateam.client.parser.cli;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.data.Venue;
@@ -9,6 +10,7 @@ import com.megateam.common.exception.ValidationException;
 import com.megateam.common.exception.impl.parsing.UserInterruptedException;
 import com.megateam.common.util.Printer;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -41,6 +43,12 @@ public class TicketCLIParser
 	 */
 	private final VenueCLIParser venueCLIParser;
 
+    /**
+	 * Parser resolving mode
+	 */
+	@Setter
+	private ResolvingMode mode;
+
 
 	 /**
      * Offers an ability to interrupt data input
@@ -70,11 +78,18 @@ public class TicketCLIParser
         String userInput = scanner.nextLine().trim();
 
         if ("".equals(userInput)) {
-            printer.println(
+            if (mode == ResolvingMode.CREATE)
+            {
+                printer.println(
                     "You're not able to insert a null value for this variable. Try another value"
-            );
-            proposeContinue();
-            return parseTicketName();
+                );
+                proposeContinue();
+                return parseTicketName();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         try
@@ -98,6 +113,7 @@ public class TicketCLIParser
      */
     private Coordinates parseTicketCoordinates() throws UserInterruptedException
     {
+        coordinatesCLIParser.setMode(mode);
         return coordinatesCLIParser.parseCoordinates();
     }
 
@@ -107,7 +123,7 @@ public class TicketCLIParser
      * @return ticket price
      * @throws UserInterruptedException if got not y/Y from user
      */
-    private float parseTicketPrice() throws UserInterruptedException
+    private Float parseTicketPrice() throws UserInterruptedException
     {
         printer.print("Enter ticket price (float & greater than 0): ");
 
@@ -118,11 +134,18 @@ public class TicketCLIParser
 
         if ("".equals(userInput))
 		{
-            printer.println(
+            if (mode == ResolvingMode.CREATE)
+            {
+                printer.println(
                     "You're not able to insert a null value for float variable. Try another value"
-            );
-            proposeContinue();
-            return parseTicketPrice();
+                );
+                proposeContinue();
+                return parseTicketPrice();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         try
@@ -162,11 +185,18 @@ public class TicketCLIParser
 
         if ("".equals(userInput))
 		{
-            printer.println(
+            if (mode == ResolvingMode.CREATE)
+            {
+                printer.println(
                     "You're not able to insert a null value for this variable. Try another value"
-            );
-            proposeContinue();
-            return parseTicketComment();
+                );
+                proposeContinue();
+                return parseTicketComment();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         try
@@ -190,25 +220,17 @@ public class TicketCLIParser
      */
     private Boolean parseTicketRefundable() throws UserInterruptedException
     {
-        printer.print("Enter ticket refundable (non-empty): ");
+        printer.print("Is ticket refundable (y/Y - for yes, other - for no): ");
 
         if (!scanner.hasNextLine())
             throw new UserInterruptedException("Data input successfully interrupted");
 
         String userInput = scanner.nextLine().trim();
 
-        try
-        {
-            Boolean refundable = Boolean.parseBoolean(userInput);
-            TicketValidator.validateTicketRefundable(refundable);
-            return refundable;
-        }
-		catch (ValidationException e)
-		{
-            printer.println(e.getMessage());
-            proposeContinue();
-            return parseTicketRefundable();
-        }
+        if ("".equals(userInput) && mode == ResolvingMode.UPDATE)
+            return null;
+
+        return "Y".equalsIgnoreCase(userInput);
     }
 
     /**
@@ -260,6 +282,7 @@ public class TicketCLIParser
      */
     private Venue parseTicketVenue() throws UserInterruptedException
     {
+        venueCLIParser.setMode(mode);
         return venueCLIParser.parseVenue();
     }
 
@@ -275,7 +298,7 @@ public class TicketCLIParser
         String name = parseTicketName();
         Coordinates coordinates = parseTicketCoordinates();
         LocalDateTime creationDate = LocalDateTime.now(ZoneId.systemDefault());
-        float price = parseTicketPrice();
+        Float price = parseTicketPrice();
         String comment = parseTicketComment();
         Boolean ref = parseTicketRefundable();
         TicketType type = parseTicketType();

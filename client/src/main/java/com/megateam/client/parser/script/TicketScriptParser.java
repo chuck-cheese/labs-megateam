@@ -1,5 +1,6 @@
 package com.megateam.client.parser.script;
 
+import com.megateam.client.resolving.ResolvingMode;
 import com.megateam.common.util.TypesParser;
 import com.megateam.common.data.Coordinates;
 import com.megateam.common.data.Ticket;
@@ -25,16 +26,16 @@ public class TicketScriptParser
      * @return ticket instance
      * @throws DataclassParsingException if something went wrong during parsing dataclass from script
      */
-    public static Ticket parseTicket(Scanner scanner) throws DataclassParsingException {
+    public static Ticket parseTicket(Scanner scanner, ResolvingMode mode) throws DataclassParsingException {
         try
         {
-			String name = scanner.nextLine();
-	        Coordinates coordinates = CoordinatesScriptParser.parseCoordinates(scanner);
-            float price = TypesParser.parseFloat(scanner.nextLine());
-            String comment = scanner.nextLine();
-            boolean refundable = TypesParser.parseBoolean(scanner.nextLine());
+			String name = TypesParser.parseString(scanner.nextLine());
+	        Coordinates coordinates = CoordinatesScriptParser.parseCoordinates(scanner, mode);
+            Float price = TypesParser.parseFloat(scanner.nextLine());
+            String comment = TypesParser.parseString(scanner.nextLine());
+            Boolean refundable = TypesParser.parseBoolean(scanner.nextLine());
             TicketType ticketType = TypesParser.parseTicketType(scanner.nextLine());
-            Venue venue = VenueScriptParser.parseVenue(scanner);
+            Venue venue = VenueScriptParser.parseVenue(scanner, mode);
 
 			Ticket ticket = new Ticket(
 					name,
@@ -46,7 +47,11 @@ public class TicketScriptParser
 					ticketType,
 					venue);
 
-	        TicketValidator.validateTicket(ticket);
+	        if (mode == ResolvingMode.CREATE)
+	        {
+				TicketValidator.validateTicket(ticket);
+	        }
+
 			return ticket;
         }
 		catch (ValidationException e)

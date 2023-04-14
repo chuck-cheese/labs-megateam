@@ -44,7 +44,7 @@ public class CommandFactory
 			case "remove_by_id" -> new RemoveByIdCommand(args, printer);
 			case "clear" -> new ClearCommand(args, printer);
 			case "save" -> new SaveCommand(args, printer);
-			case "execute_script" -> new ExecuteScriptCommand(args, printer); // TODO: implement recursion fix
+			case "execute_script" -> new ExecuteScriptCommand(args, printer);
 			case "exit" -> new ExitCommand(args, printer);
 			case "remove_first" -> new RemoveFirstCommand(args, printer);
 			case "remove_last" -> new RemoveLastCommand(args, printer);

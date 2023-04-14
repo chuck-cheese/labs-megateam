@@ -4,6 +4,7 @@ import com.megateam.client.CommandFactory;
 import com.megateam.client.parser.cli.TicketCLIParser;
 import com.megateam.common.command.Command;
 import com.megateam.common.command.impl.ExecuteScriptCommand;
+import com.megateam.common.command.impl.UpdateCommand;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.data.validation.TicketValidator;
 import com.megateam.common.exception.CommandException;
@@ -58,8 +59,19 @@ public class SingleCommandResolvingService implements ResolvingService
 
 		if (command.getRequiresElement())
 		{
-			Ticket ticket = ticketCLIParser.parseTicket();
-			TicketValidator.validateTicket(ticket);
+			Ticket ticket;
+
+			if (!(command instanceof UpdateCommand))
+			{
+				ticketCLIParser.setMode(ResolvingMode.CREATE);
+				ticket = ticketCLIParser.parseTicket();
+				TicketValidator.validateTicket(ticket);
+			}
+			else
+			{
+				ticketCLIParser.setMode(ResolvingMode.UPDATE);
+				ticket = ticketCLIParser.parseTicket();
+			}
 
 			command.setAdditionalArgument(ticket);
 		}
