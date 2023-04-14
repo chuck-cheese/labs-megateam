@@ -275,7 +275,7 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	public void removeLower(@NonNull Ticket item) throws ElementNotFoundException
 	{
 		List<Integer> removedIds = tickets.stream()
-				.filter(ticket -> ticket.compareTo(item) < 0)
+				.filter(ticket -> ticket.compareTo(item) > 0)
 				.map(Ticket::getId)
 				.toList();
 
