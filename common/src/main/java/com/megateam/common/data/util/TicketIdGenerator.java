@@ -11,6 +11,7 @@ public class TicketIdGenerator
 	 */
 	public static int generateNewId()
 	{
-		return (int) System.currentTimeMillis();
+		int id = (int) System.currentTimeMillis();
+		return (id <= 0) ? (id & 31) : id;
 	}
 }
