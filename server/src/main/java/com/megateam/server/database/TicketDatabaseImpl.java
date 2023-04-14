@@ -4,11 +4,13 @@ import com.megateam.common.data.Ticket;
 import com.megateam.common.data.util.TicketIdGenerator;
 import com.megateam.common.data.util.TicketType;
 import com.megateam.common.data.util.VenueIdGenerator;
+import com.megateam.common.exception.DatabaseException;
+import com.megateam.common.exception.FileException;
 import com.megateam.common.exception.impl.database.ElementIdAlreadyExistsException;
 import com.megateam.common.exception.impl.database.ElementNotFoundException;
 import com.megateam.common.exception.impl.database.UnableToLoadDatabaseException;
 import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException;
-import com.megateam.common.util.FileManipulationService;
+import com.megateam.server.database.data.TicketDatabaseDataclass;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
@@ -33,20 +35,26 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	 */
 	private final List<Ticket> tickets;
 
+//	TODO: remove redundant code block
+//	/**
+//	 * File manipulation service instance
+//	 */
+//	private final FileManipulationService fms;
+
 	/**
-	 * File manipulation service instance
+	 * Database saving service instance
 	 */
-	private final FileManipulationService fms;
+	private final DatabaseSavingService savingService;
 
 
 	/**
 	 * TicketDatabaseImpl constructor
 	 */
-	public TicketDatabaseImpl(FileManipulationService fms)
+	public TicketDatabaseImpl(DatabaseSavingService savingService)
 	{
 		this.creationDate = LocalDateTime.now(ZoneId.systemDefault());
 		this.tickets = new ArrayList<>();
-		this.fms = fms;
+		this.savingService = savingService;
 	}
 
 	/**
@@ -193,7 +201,14 @@ public class TicketDatabaseImpl implements Database<Ticket>
 	@Override
 	public void save() throws UnableToSaveDatabaseException
 	{
-//		TODO: implement collection saving
+		try
+		{
+			savingService.save(new TicketDatabaseDataclass(creationDate, tickets));
+		}
+		catch (FileException | DatabaseException e)
+		{
+			throw new UnableToSaveDatabaseException(e.getMessage());
+		}
 	}
 
 	/**
