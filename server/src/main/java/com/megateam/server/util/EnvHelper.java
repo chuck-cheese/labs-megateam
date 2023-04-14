@@ -12,6 +12,7 @@ public class EnvHelper
 	 */
 	public static String retrieveSavingFileLocation()
 	{
-		return System.getenv("SAVING_FILE");
+		String location = System.getenv("SAVING_FILE");
+		return (location == null) ? "" : location;
 	}
 }
