@@ -2,6 +2,8 @@ package com.megateam.common.command.impl;
 
 import com.megateam.common.command.Command;
 import com.megateam.common.exception.*;
+import com.megateam.common.exception.impl.command.RecursionDetectedException;
+import com.megateam.common.execution.ExecutionService;
 import com.megateam.common.util.Printer;
 
 import java.io.File;
@@ -37,13 +39,31 @@ public class ExecuteScriptCommand extends Command
 		{
 			File script = fms.getFileByName(arguments.get(0));
 			List<Command> resolvedScript = resolvingService.resolve(script);
-			return executionService.execute(resolvedScript);
+
+			try
+			{
+				if (ExecutionService.EXECUTED_SCRIPTS.contains(script.getName()))
+				{
+					throw new RecursionDetectedException(
+							script.getName() + " is already executed. Recursion detected. Aborting script execution"
+					);
+				}
+
+				ExecutionService.EXECUTED_SCRIPTS.add(script.getName());
+				boolean executionResult = executionService.execute(resolvedScript);
+				ExecutionService.EXECUTED_SCRIPTS.remove(script.getName());
+				return executionResult;
+			}
+			catch (RecursionDetectedException e)
+			{
+				ExecutionService.EXECUTED_SCRIPTS.remove(script.getName());
+				throw new RecursionDetectedException(e.getMessage());
+			}
 		}
 		catch (ParsingException | ValidationException | FileException e)
 		{
 			printer.println(e.getMessage());
+			return false;
 		}
-
-		return false;
 	}
 }
