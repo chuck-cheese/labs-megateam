@@ -111,23 +111,32 @@ public class DatabaseSavingService
 				);
 			}
 
-			Set<Integer> usedIds = new HashSet<>();
+			Set<Integer> usedTicketIds = new HashSet<>();
+			Set<Long> usedVenueIds = new HashSet<>();
 			List<Ticket> elements = databaseDataclass.getData();
 			List<Ticket> correctElements = new ArrayList<>();
 
 			for (Ticket element : elements)
 			{
-				if (element.getId() == null || usedIds.contains(element.getId()))
+				if (element.getId() == null || usedTicketIds.contains(element.getId()))
 				{
 					throw new UnableToLoadDatabaseException(
-							"Unable to load the database. Elements should have unique ids"
+							"Unable to load the database. Tickets should have unique ids"
+					);
+				}
+
+				if (element.getVenue() == null || usedVenueIds.contains(element.getVenue().getId()))
+				{
+					throw new UnableToLoadDatabaseException(
+							"Unable to load the database. Venues should have unique ids"
 					);
 				}
 
 				try
 				{
 					TicketValidator.validateTicket(element);
-					usedIds.add(element.getId());
+					usedTicketIds.add(element.getId());
+					usedVenueIds.add(element.getVenue().getId());
 					correctElements.add(element);
 				}
 				catch (ValidationException e)
