@@ -12,3 +12,6 @@ build
 
 # Ignoring application scripts
 *.script
+
+# Ignoring collection dumps
+*.xml
