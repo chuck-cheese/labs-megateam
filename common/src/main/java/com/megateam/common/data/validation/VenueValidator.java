@@ -4,7 +4,6 @@ import com.megateam.common.data.Venue;
 import com.megateam.common.exception.impl.validation.BoundValidationException;
 import com.megateam.common.exception.impl.validation.CannotBeEmptyException;
 import com.megateam.common.exception.impl.validation.NullValidationException;
-import lombok.NonNull;
 
 /**
  * Utility class for venue validation
@@ -59,8 +58,11 @@ public class VenueValidator
 	 * @throws NullValidationException if some non-null fields are null
 	 * @throws CannotBeEmptyException if some non-empty fields are empty
 	 */
-	public static void validateVenue(@NonNull Venue venue) throws BoundValidationException, NullValidationException, CannotBeEmptyException
+	public static void validateVenue(Venue venue) throws BoundValidationException, NullValidationException, CannotBeEmptyException
 	{
+		if (venue == null)
+			throw new NullValidationException("Venue cannot be null");
+
 		validateVenueName(venue.getName());
 		validateVenueCapacity(venue.getCapacity());
 	}

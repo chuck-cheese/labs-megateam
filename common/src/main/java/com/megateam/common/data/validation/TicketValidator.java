@@ -4,7 +4,6 @@ import com.megateam.common.data.Ticket;
 import com.megateam.common.exception.impl.validation.BoundValidationException;
 import com.megateam.common.exception.impl.validation.CannotBeEmptyException;
 import com.megateam.common.exception.impl.validation.NullValidationException;
-import lombok.NonNull;
 
 import java.time.LocalDateTime;
 
@@ -97,8 +96,11 @@ public class TicketValidator
 	 * @throws NullValidationException if some non-null fields are null
 	 * @throws CannotBeEmptyException if some non-empty fields are empty
 	 */
-	public static void validateTicket(@NonNull Ticket ticket) throws BoundValidationException, NullValidationException, CannotBeEmptyException
+	public static void validateTicket(Ticket ticket) throws BoundValidationException, NullValidationException, CannotBeEmptyException
 	{
+		if (ticket == null)
+			throw new NullValidationException("Ticket cannot be null");
+
 		validateTicketName(ticket.getName());
 		CoordinatesValidator.validateCoordinates(ticket.getCoordinates());
 		validateTicketCreationDate(ticket.getCreationDate());
