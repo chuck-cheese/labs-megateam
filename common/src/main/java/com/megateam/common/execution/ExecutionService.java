@@ -5,13 +5,20 @@ import com.megateam.common.exception.CommandException;
 import com.megateam.common.exception.DatabaseException;
 import com.megateam.common.exception.impl.command.DefaultExecutorException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Execution services abstraction
  */
 public interface ExecutionService
 {
+	/**
+	 * Executed scripts
+	 */
+	Set<String> EXECUTED_SCRIPTS = new HashSet<>();
+
 	/**
 	 * This method is an abstraction for single command execution method
 	 *
