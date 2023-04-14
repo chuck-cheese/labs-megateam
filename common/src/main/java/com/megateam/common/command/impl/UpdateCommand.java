@@ -11,53 +11,45 @@ import com.megateam.common.util.TypesParser;
 
 import java.util.List;
 
-/**
- * Updates existing element
- */
-public class UpdateCommand extends Command
-{
-	/**
-	 * Update command constructor
-	 *
-	 * @param arguments command arguments
-	 * @param printer command printer instance
-	 */
-	public UpdateCommand(List<String> arguments, Printer printer)
-	{
-		super(arguments, printer, true, 1);
-	}
+/** Updates existing element */
+public class UpdateCommand extends Command {
+    /**
+     * Update command constructor
+     *
+     * @param arguments command arguments
+     * @param printer command printer instance
+     */
+    public UpdateCommand(List<String> arguments, Printer printer) {
+        super(arguments, printer, true, 1);
+    }
 
-	/**
-	 * This method is an abstraction for command execution method
-	 *
-	 * @return boolean status of command execution
-	 * @throws CommandException  if something went wrong during the command operations
-	 * @throws DatabaseException if something went wrong during the database operations
-	 */
-	@Override
-	public boolean execute() throws CommandException, DatabaseException
-	{
-		Ticket element = (Ticket) additionalArgument;
+    /**
+     * This method is an abstraction for command execution method
+     *
+     * @return boolean status of command execution
+     * @throws CommandException if something went wrong during the command operations
+     * @throws DatabaseException if something went wrong during the database operations
+     */
+    @Override
+    public boolean execute() throws CommandException, DatabaseException {
+        Ticket element = (Ticket) additionalArgument;
 
-		if (element == null)
-		{
-			throw new CommandExecutionFailedException("Provided element is null. Update not required");
-		}
+        if (element == null) {
+            throw new CommandExecutionFailedException(
+                    "Provided element is null. Update not required");
+        }
 
-		try
-		{
-			Integer id = TypesParser.parseInteger(arguments.get(0));
-			if (id == null)
-				throw new CommandExecutionFailedException("Element id cannot be parsed");
+        try {
+            Integer id = TypesParser.parseInteger(arguments.get(0));
+            if (id == null)
+                throw new CommandExecutionFailedException("Element id cannot be parsed");
 
-			dao.update(id, element);
-			printer.println("Successfully updated element");
-			return true;
-		}
-		catch (ParsingException e)
-		{
-			printer.println(e.getMessage());
-			return false;
-		}
-	}
+            dao.update(id, element);
+            printer.println("Successfully updated element");
+            return true;
+        } catch (ParsingException e) {
+            printer.println(e.getMessage());
+            return false;
+        }
+    }
 }

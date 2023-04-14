@@ -23,64 +23,58 @@ import com.megateam.server.database.data.TicketDatabaseDataclass;
 import com.megateam.server.execution.SingleCommandExecutionService;
 import com.megateam.server.util.EnvHelper;
 
+import java.util.Scanner;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.util.Scanner;
 
-public class Main
-{
-	public static void main(String[] args)
-	{
-		Printer printer = new ConsolePrinter();
-		Scanner scanner = new Scanner(System.in);
-		FileManipulationService fms = new FileManipulationService();
+public class Main {
+    public static void main(String[] args) {
+        Printer printer = new ConsolePrinter();
+        Scanner scanner = new Scanner(System.in);
+        FileManipulationService fms = new FileManipulationService();
 
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(TicketDatabaseDataclass.class);
-			Marshaller marshaller = context.createMarshaller();
-			Unmarshaller unmarshaller = context.createUnmarshaller();
+        try {
+            JAXBContext context = JAXBContext.newInstance(TicketDatabaseDataclass.class);
+            Marshaller marshaller = context.createMarshaller();
+            Unmarshaller unmarshaller = context.createUnmarshaller();
 
-			DatabaseSavingService dss = new DatabaseSavingService(
-				fms, fms.getFileByName(EnvHelper.retrieveSavingFileLocation()), marshaller, unmarshaller
-			);
+            DatabaseSavingService dss =
+                    new DatabaseSavingService(
+                            fms,
+                            fms.getFileByName(EnvHelper.retrieveSavingFileLocation()),
+                            marshaller,
+                            unmarshaller);
 
-			Database<Ticket> database = new TicketDatabaseImpl(dss);
+            Database<Ticket> database = new TicketDatabaseImpl(dss);
 
-			try
-			{
-				database.load();
-			}
-			catch (UnableToLoadDatabaseException e)
-			{
-				printer.println(e.getMessage());
-				printer.println("Initializing empty database");
-				database.initEmptyDb();
-			}
+            try {
+                database.load();
+            } catch (UnableToLoadDatabaseException e) {
+                printer.println(e.getMessage());
+                printer.println("Initializing empty database");
+                database.initEmptyDb();
+            }
 
-			Dao<Ticket> dao = new TicketDaoImpl(database);
+            Dao<Ticket> dao = new TicketDaoImpl(database);
 
-			CommandFactory commandFactory = new CommandFactory(printer);
-			CoordinatesCLIParser coordinatesCLIParser = new CoordinatesCLIParser(printer, scanner);
-			VenueCLIParser venueCLIParser = new VenueCLIParser(printer, scanner);
-			TicketCLIParser ticketCLIParser = new TicketCLIParser(
-					printer,
-					scanner,
-					coordinatesCLIParser,
-					venueCLIParser
-			);
-			ResolvingService resolvingService = new SingleCommandResolvingService(commandFactory,ticketCLIParser);
-			ExecutionService executionService = new SingleCommandExecutionService(dao, fms);
+            CommandFactory commandFactory = new CommandFactory(printer);
+            CoordinatesCLIParser coordinatesCLIParser = new CoordinatesCLIParser(printer, scanner);
+            VenueCLIParser venueCLIParser = new VenueCLIParser(printer, scanner);
+            TicketCLIParser ticketCLIParser =
+                    new TicketCLIParser(printer, scanner, coordinatesCLIParser, venueCLIParser);
+            ResolvingService resolvingService =
+                    new SingleCommandResolvingService(commandFactory, ticketCLIParser);
+            ExecutionService executionService = new SingleCommandExecutionService(dao, fms);
 
-			Console console = new Console(scanner, printer, resolvingService, executionService);
-			console.run();
-		}
-		catch (FileException | JAXBException e)
-		{
-			printer.println(e.getMessage());
-			printer.println("Unable to create JAXB context. Saving / loading operations are not available");
-		}
-	}
+            Console console = new Console(scanner, printer, resolvingService, executionService);
+            console.run();
+        } catch (FileException | JAXBException e) {
+            printer.println(e.getMessage());
+            printer.println(
+                    "Unable to create JAXB context. Saving / loading operations are not available");
+        }
+    }
 }

@@ -9,42 +9,34 @@ import com.megateam.common.exception.DatabaseException;
 import com.megateam.common.exception.impl.command.DefaultExecutorException;
 import com.megateam.common.execution.ExecutionService;
 import com.megateam.common.util.FileManipulationService;
+
 import lombok.RequiredArgsConstructor;
 
-/**
- * A service for single command execution
- */
+/** A service for single command execution */
 @RequiredArgsConstructor
-public class SingleCommandExecutionService implements ExecutionService
-{
-	/**
-	 * Ticket dao instance
-	 */
-	private final Dao<Ticket> dao;
+public class SingleCommandExecutionService implements ExecutionService {
+    /** Ticket dao instance */
+    private final Dao<Ticket> dao;
 
-	/**
-	 * FileManipulationService instance
-	 */
-	private final FileManipulationService fms;
+    /** FileManipulationService instance */
+    private final FileManipulationService fms;
 
-	/**
-	 * This method executes a single command
-	 *
-	 * @param command command, that should be executed
-	 * @return command execution status
-	 * @throws DefaultExecutorException if something went wrong during command execution
-	 */
-	@Override
-	public boolean execute(Command command) throws CommandException, DatabaseException
-	{
-		command.setDao(dao);
-		command.setFms(fms);
+    /**
+     * This method executes a single command
+     *
+     * @param command command, that should be executed
+     * @return command execution status
+     * @throws DefaultExecutorException if something went wrong during command execution
+     */
+    @Override
+    public boolean execute(Command command) throws CommandException, DatabaseException {
+        command.setDao(dao);
+        command.setFms(fms);
 
-		if (command instanceof ExecuteScriptCommand)
-		{
-			command.setExecutionService(new CommandScriptExecutionService(dao, fms));
-		}
+        if (command instanceof ExecuteScriptCommand) {
+            command.setExecutionService(new CommandScriptExecutionService(dao, fms));
+        }
 
-		return command.execute();
-	}
+        return command.execute();
+    }
 }

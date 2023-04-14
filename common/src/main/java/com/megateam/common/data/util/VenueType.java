@@ -1,22 +1,13 @@
 package com.megateam.common.data.util;
 
-/**
- * Allowed venue types
- */
-public enum VenueType
-{
-	/**
-	 * Bar venue type
-	 */
-	BAR,
+/** Allowed venue types */
+public enum VenueType {
+    /** Bar venue type */
+    BAR,
 
-	/**
-	 * Loft venue type
-	 */
-	LOFT,
+    /** Loft venue type */
+    LOFT,
 
-	/**
-	 * Mall venue type
-	 */
-	MALL;
+    /** Mall venue type */
+    MALL;
 }
