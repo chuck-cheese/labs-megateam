@@ -49,15 +49,23 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'automatic_codestyle_format: ${{steps.refactordate.outputs.refactordate}}'
 
+      - name: Generate Javadoc
+        run: ./gradlew allJavadoc
+
       - name: Upload Javadoc
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: documentation
-          java-version: 17
-          project: gradle
-          target-folder: docs
-          custom-command: ./gradlew allJavadoc
+          folder: docs
+          commit-message: 'Javadoc update: ${{steps.refactordate.outputs.refactordate}}'
+#      - name: Upload Javadoc
+#        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+#        with:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          javadoc-branch: documentation
+#          java-version: 17
+#          project: gradle
+#          target-folder: docs
+#          custom-command: ./gradlew allJavadoc
 
   notification:
     runs-on: ubuntu-latest
