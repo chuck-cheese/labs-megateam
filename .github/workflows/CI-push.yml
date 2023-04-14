@@ -55,9 +55,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
-          target-folder: build/docs/javadoc
           project: gradle
-          custom-command: ./gradlew allJavadoc
+          custom-command: ./gradlew allJavadoc |
+            mkdir docs |
+            mv build/docs/javadoc/**/* docs/
+          target-folder: docs
 
   notification:
     runs-on: ubuntu-latest
