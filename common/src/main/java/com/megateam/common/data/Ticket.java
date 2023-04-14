@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
  * Is stored in the database
  */
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode

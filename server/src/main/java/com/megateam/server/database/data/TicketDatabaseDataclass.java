@@ -3,6 +3,7 @@ package com.megateam.server.database.data;
 import com.megateam.common.data.Ticket;
 import com.megateam.common.data.util.LocalDateTimeAdapter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.xml.bind.annotation.*;
@@ -13,17 +14,18 @@ import java.util.List;
 /**
  * Container class for saving ticket database
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 @RequiredArgsConstructor
+@NoArgsConstructor(force = true)
 @Getter
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "database")
 public class TicketDatabaseDataclass
 {
 	/**
 	 * Collection creation date
 	 */
-	@XmlElement(name = "dbCreationDate", required = true)
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	@XmlElement(name = "dbCreationDate", required = true)
 	private final LocalDateTime creationDate;
 
 	/**

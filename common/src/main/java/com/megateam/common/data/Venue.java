@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.*;
  * Is used in Ticket data class
  */
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Is used in Ticket data class
  */
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Getter
 @EqualsAndHashCode
 @XmlRootElement(name = "coordinates")
