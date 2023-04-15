@@ -319,6 +319,8 @@ public class TicketDatabaseImpl implements Database<Ticket> {
      */
     @Override
     public List<Ticket> findLessThanType(@NonNull TicketType type) {
-        return tickets.stream().filter(ticket -> ( ticket.getType() == null ||ticket.getType().compareTo(type) < 0)).toList();
+        return tickets.stream()
+                .filter(ticket -> (ticket.getType() == null || ticket.getType().compareTo(type) > 0))
+                .toList();
     }
 }
