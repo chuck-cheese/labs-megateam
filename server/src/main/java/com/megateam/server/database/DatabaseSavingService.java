@@ -11,19 +11,17 @@ import com.megateam.common.exception.impl.database.UnableToSaveDatabaseException
 import com.megateam.common.exception.impl.file.FileNotExistsException;
 import com.megateam.common.util.FileManipulationService;
 import com.megateam.server.database.data.TicketDatabaseDataclass;
-
 import lombok.RequiredArgsConstructor;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /** Class for saving database into a file */
 @RequiredArgsConstructor
@@ -103,10 +101,13 @@ public class DatabaseSavingService {
                             "Unable to load the database. Tickets should have unique ids");
                 }
 
-                if (element.getVenue() == null
-                        || usedVenueIds.contains(element.getVenue().getId())) {
+                if (element.getVenue() == null || usedVenueIds.contains(element.getVenue().getId())) {
                     throw new UnableToLoadDatabaseException(
                             "Unable to load the database. Venues should have unique ids");
+                }
+
+                if (element.getVenue().getId() == 0) {
+                    throw new UnableToLoadDatabaseException("Unable to load venue id");
                 }
 
                 try {
